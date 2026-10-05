@@ -1,0 +1,18 @@
+{
+  "stick_deadzone": 0.18,
+  "trigger_threshold": 0.12,
+  "camera_sensitivity": 1.0,
+  "buttons": {
+    "cross": "A",
+    "circle": "B",
+    "square": "X",
+    "triangle": "Y",
+    "l1": "LB",
+    "r1": "RB",
+    "create": "Back",
+    "options": "Start",
+    "ps": "Guide",
+    "l3": "LS",
+    "r3": "RS"
+  }
+}
