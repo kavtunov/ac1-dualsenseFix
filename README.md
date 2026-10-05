@@ -278,6 +278,7 @@ Virtual Xbox 360 pad is ready.
 2. Сначала запусти `./ac1-gamepad.sh`  
 3. Потом уже игру  
 4. В Steam у AC1 должен быть **отключён Steam Input**
+5. Если все равно не заработало, пиши мне в телеграмм @Licurmi
 
 ## В терминале ошибка про права / Permission denied
 Выполни:
@@ -342,7 +343,6 @@ sudo usermod -aG input $USER
 
 If you have a **PlayStation 5 DualSense** controller and **Assassin’s Creed 1** on Linux via Steam, this script helps the gamepad work properly.
 
-You do **not** need to know programming. Follow the steps below — it’s basically like installing a mod.
 
 ---
 
@@ -610,6 +610,7 @@ When you are done:
 2. Start `./ac1-gamepad.sh` **first**  
 3. Then start the game  
 4. In Steam, AC1 must have **Steam Input disabled**
+5. If it still doesn't work, contact me (telegramm) @Licurmi
 
 ## Permission denied error in the terminal
 Run:
