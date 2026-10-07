@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""DualSense -> virtual Xbox 360 pad for Assassin's Creed 1 + EaglePatch XInput."""
 
 from __future__ import annotations
 
@@ -146,7 +145,7 @@ def main() -> int:
     norm_trigger = make_trigger_normalizer(trigger_threshold)
     btn_map = build_btn_map(cfg["buttons"])
 
-    print("Waiting for DualSense Wireless Controller...")
+    print("Waiting for DualSense...")
     pad = None
     while pad is None:
         pad = find_dualsense()
@@ -154,13 +153,11 @@ def main() -> int:
             time.sleep(0.4)
 
     nodes = find_all_dualsense_nodes()
-    print("Hiding DualSense nodes from the game:")
     for node in nodes:
-        print(f"  {node.path} ({node.name})")
         try:
             node.grab()
         except OSError as exc:
-            print(f"  grab failed: {exc}")
+            print(f"grab failed {node.path}: {exc}")
 
     abs_caps: dict[int, AbsInfo] = {}
     for item in pad.capabilities(absinfo=True).get(ecodes.EV_ABS, []):
@@ -229,21 +226,7 @@ def main() -> int:
     abs_state: dict[int, int] = {}
     axis_values = {code: int(pad.absinfo(code).value) for code in abs_caps}
 
-    print(
-        "Axes:",
-        f"LX/LY={axis_names.get(lx)}/{axis_names.get(ly)}",
-        f"RX/RY={axis_names.get(rx)}/{axis_names.get(ry)}",
-        f"LT/RT={axis_names.get(lt)}/{axis_names.get(rt)}",
-    )
-    print("Loaded config.json")
-    print("Buttons:", cfg["buttons"])
-    print(
-        f"Deadzone={stick_deadzone:.2f} | Trigger={trigger_threshold:.2f} | Camera={camera_sensitivity:.2f}"
-    )
-    print("Virtual Xbox 360 pad is ready.")
-    print("Change layout anytime with: ./ac1-settings.sh")
-    print("Disable Steam Input for AC1, then launch the game.")
-    print("Ctrl+C to stop.")
+    print("ready")
 
     try:
         while True:
@@ -281,7 +264,7 @@ def main() -> int:
             if rt is not None:
                 set_abs(ui, ecodes.ABS_RZ, norm_trigger(axis_values[rt], abs_caps[rt]), abs_state)
     except KeyboardInterrupt:
-        print("\nStopped.")
+        print("stopped")
     finally:
         for node in nodes:
             try:

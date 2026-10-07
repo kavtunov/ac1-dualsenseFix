@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Simple GUI to change DualSense -> Xbox layout for AC1."""
 
 from __future__ import annotations
 
@@ -7,7 +6,6 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 
 from config_lib import (
-    CONFIG_PATH,
     DEFAULT_CONFIG,
     DUALSENSE_KEYS,
     XBOX_ACTIONS,
@@ -19,9 +17,9 @@ from config_lib import (
 class SettingsApp(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
-        self.title("AC1 DualSense — настройка кнопок")
-        self.minsize(520, 640)
-        self.geometry("560x700")
+        self.title("AC1 DualSense")
+        self.minsize(480, 560)
+        self.geometry("520x620")
 
         self.config_data = load_config()
         self.button_vars: dict[str, tk.StringVar] = {}
@@ -34,25 +32,8 @@ class SettingsApp(tk.Tk):
         self._build()
 
     def _build(self) -> None:
-        header = ttk.Label(
-            self,
-            text="Выбери, что делает каждая кнопка DualSense в игре",
-            font=("Sans", 12, "bold"),
-            wraplength=500,
-            justify="center",
-        )
-        header.pack(padx=16, pady=(16, 8))
-
-        hint = ttk.Label(
-            self,
-            text=f"Настройки сохраняются в:\n{CONFIG_PATH}",
-            wraplength=500,
-            justify="center",
-        )
-        hint.pack(padx=16, pady=(0, 12))
-
         frame = ttk.Frame(self)
-        frame.pack(fill="both", expand=True, padx=16)
+        frame.pack(fill="both", expand=True, padx=16, pady=16)
 
         xbox_labels = [label for _code, label in XBOX_ACTIONS]
 
@@ -66,33 +47,24 @@ class SettingsApp(tk.Tk):
                 textvariable=var,
                 values=xbox_labels,
                 state="readonly",
-                width=42,
+                width=12,
             )
             combo.grid(row=row, column=1, sticky="ew", pady=4, padx=(12, 0))
 
         frame.columnconfigure(1, weight=1)
 
-        sens = ttk.LabelFrame(self, text="Чувствительность")
-        sens.pack(fill="x", padx=16, pady=12)
+        sens = ttk.LabelFrame(self, text="Sensitivity")
+        sens.pack(fill="x", padx=16, pady=(0, 12))
 
-        self._add_scale(sens, "Мёртвая зона стиков", self.deadzone_var, 0.0, 0.6, 0)
-        self._add_scale(sens, "Порог триггеров", self.trigger_var, 0.0, 0.7, 1)
-        self._add_scale(sens, "Чувствительность камеры", self.camera_var, 0.2, 2.5, 2)
+        self._add_scale(sens, "Deadzone", self.deadzone_var, 0.0, 0.6, 0)
+        self._add_scale(sens, "Triggers", self.trigger_var, 0.0, 0.7, 1)
+        self._add_scale(sens, "Camera", self.camera_var, 0.2, 2.5, 2)
 
         buttons = ttk.Frame(self)
         buttons.pack(fill="x", padx=16, pady=(0, 16))
 
-        ttk.Button(buttons, text="Сбросить по умолчанию", command=self.reset_defaults).pack(
-            side="left"
-        )
-        ttk.Button(buttons, text="Сохранить", command=self.save).pack(side="right")
-
-        tip = ttk.Label(
-            self,
-            text="После сохранения перезапусти маппер (./ac1-gamepad.sh),\nчтобы новые кнопки применились.",
-            justify="center",
-        )
-        tip.pack(padx=16, pady=(0, 16))
+        ttk.Button(buttons, text="Reset", command=self.reset_defaults).pack(side="left")
+        ttk.Button(buttons, text="Save", command=self.save).pack(side="right")
 
     def _add_scale(
         self,
@@ -132,11 +104,8 @@ class SettingsApp(tk.Tk):
         }
 
     def save(self) -> None:
-        path = save_config(self._collect())
-        messagebox.showinfo(
-            "Сохранено",
-            f"Готово!\n\nФайл: {path}\n\nПерезапусти ./ac1-gamepad.sh",
-        )
+        save_config(self._collect())
+        messagebox.showinfo("Saved", "OK")
 
     def reset_defaults(self) -> None:
         self.config_data = dict(DEFAULT_CONFIG)

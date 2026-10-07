@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Load / save user config for AC1 DualSense mapper."""
 
 from __future__ import annotations
 
@@ -30,35 +29,33 @@ DEFAULT_CONFIG: dict[str, Any] = {
     },
 }
 
-# DualSense physical button -> config key
 DUALSENSE_KEYS = [
-    ("cross", "✕ Cross (крестик)"),
-    ("circle", "○ Circle (круг)"),
-    ("square", "□ Square (квадрат)"),
-    ("triangle", "△ Triangle (треугольник)"),
+    ("cross", "Cross"),
+    ("circle", "Circle"),
+    ("square", "Square"),
+    ("triangle", "Triangle"),
     ("l1", "L1"),
     ("r1", "R1"),
     ("create", "Create"),
     ("options", "Options"),
     ("ps", "PS"),
-    ("l3", "L3 (нажатие левого стика)"),
-    ("r3", "R3 (нажатие правого стика)"),
+    ("l3", "L3"),
+    ("r3", "R3"),
 ]
 
-# What each Xbox output means in AC1
 XBOX_ACTIONS = [
-    ("A", "A — Ноги / blend / free-run (с R1)"),
-    ("B", "B — Пустая рука / захват"),
-    ("X", "X — Атака / оружие"),
-    ("Y", "Y — Голова / Eagle Vision"),
-    ("LB", "LB — Лок на цель"),
-    ("RB", "RB — High Profile"),
-    ("Back", "Back — Карта"),
-    ("Start", "Start — Пауза"),
-    ("Guide", "Guide — кнопка Xbox/PS"),
-    ("LS", "LS — нажатие левого стика"),
-    ("RS", "RS — центр камеры"),
-    ("None", "Выключено"),
+    ("A", "A"),
+    ("B", "B"),
+    ("X", "X"),
+    ("Y", "Y"),
+    ("LB", "LB"),
+    ("RB", "RB"),
+    ("Back", "Back"),
+    ("Start", "Start"),
+    ("Guide", "Guide"),
+    ("LS", "LS"),
+    ("RS", "RS"),
+    ("None", "None"),
 ]
 
 XBOX_LABEL_TO_CODE = {
