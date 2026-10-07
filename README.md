@@ -37,7 +37,7 @@
 - Купленная / установленная **Assassin’s Creed 1**
 - Геймпад **DualSense**
 - Интернет (скачать 2 файла мода)
-- Терминал (чёрное окно команд) — не страшно, просто копируешь команды
+- Терминал
 
 ---
 
@@ -370,7 +370,7 @@ This script alone does **not** replace the required game mod. For Assassin’s C
 - **Assassin’s Creed 1** installed
 - A **DualSense** controller
 - Internet (to download 2 mod files)
-- A terminal — just copy and paste the commands
+- Terminal 
 
 ---
 
